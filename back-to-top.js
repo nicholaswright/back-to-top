@@ -9,7 +9,7 @@
         return this.each(function() {
             
             var defaults = {
-                    className: 'backToTopVisible'
+                    className: 'back-to-top-visible'
                 },
                 settings = $.extend({}, defaults, options),
                 el = $(this),
