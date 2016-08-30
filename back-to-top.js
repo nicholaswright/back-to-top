@@ -5,31 +5,33 @@
  */
 ;(function($) {
     'use strict';
-    $.fn.backTop = function(options) {
+    $.fn.backToTop = function(options) {
         return this.each(function() {
             
-            var el = $(this),
+            var defaults = {
+                    className: 'backToTopVisible'
+                },
+                settings = $.extend({}, defaults, options),
+                el = $(this),
+                
                 offset = 300,
             	fadeoutTimer;
             
             $(window)
-                .on('scroll', function(){
+                .on('scroll', function() {
                     
                     // Only show once the user has scrolled down
-                    if ($(this).scrollTop() > offset) {
-                    	el.addClass('back-top-visible');
-                    } else {
-                    	el.removeClass('back-top-visible');
-                    }
+                    ($(this).scrollTop() > offset)
+                    	? el.addClass(settings.className)
+                    	: el.removeClass(settings.className);
                     
                     // Hide the link after a couple of seconds to avoid it masking content
                     // If the user wants to see it again they can scroll slightly 
                     if (fadeoutTimer) {
                         clearTimeout(fadeoutTimer);
-                        fadeoutTimer = false;
                     }
                     fadeoutTimer = setTimeout(function(){
-                    	el.removeClass('back-top-visible');
+                    	el.removeClass(settings.className);
                     }, 1000);
                     
                 });
